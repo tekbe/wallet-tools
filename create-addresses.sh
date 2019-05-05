@@ -3,7 +3,7 @@
 set -e
 
 if [ "$#" -lt 3 ]; then
-  echo "Usage: create-new-addresses.sh <rpcuser> <rpcpassword> <wallet> <number> (optional, default: 100) <p2sh-segwit|bech32> (optional, default: bech32)"
+  echo "Usage: create-addresses.sh <rpcuser> <rpcpassword> <wallet> <number> (optional, default: 100)"
   exit 1
 fi
 
@@ -15,12 +15,6 @@ if [ "$#" -ge 4 ]; then
   ADDRCNT="$4"
 else
   ADDRCNT=100
-fi
-
-if [ "$#" -ge 5 ]; then
-  ADDRFMT="$5"
-else
-  ADDRFMT="bech32"
 fi
 
 for (( i = 0; i < ADDRCNT; i++ )); do

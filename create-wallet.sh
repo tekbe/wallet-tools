@@ -2,13 +2,14 @@
 
 set -e
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: create-wallet-from-mnemonic.sh <rpcuser> <rpcpassword>"
+if [ "$#" -ne 3 ]; then
+  echo "Usage: create-wallet.sh <rpcuser> <rpcpassword> <wallet>"
   exit 1
 fi
 
 USER=$1
 PW=$2
+WALLET=$3
 
 echo "Enter mnemonic (number of words must be divisible by 3):"
 read MNEMONIC
@@ -29,8 +30,6 @@ esac
 
 echo "Create hd seed..."
 HDSEED=$(echo $MNEMONIC | bx mnemonic-to-seed -p "$SEEDPW" | bx hd-new | bx hd-to-ec | bx ec-to-wif)
-
-read -p "Enter wallet name: " WALLET
 
 WALLETPW=""
 WALLETPW2="X"
