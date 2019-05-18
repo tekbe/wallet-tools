@@ -22,7 +22,8 @@ Download the scripts into the `bin` folder and make them executable.
 cd ~/bin
 wget https://raw.githubusercontent.com/tekbe/wallet-tools/master/create-wallet.sh
 wget https://raw.githubusercontent.com/tekbe/wallet-tools/master/create-addresses.sh
-chmod +x create-wallet.sh create-addresses.sh
+wget https://raw.githubusercontent.com/tekbe/wallet-tools/master/import-addresses.sh
+chmod +x create-wallet.sh create-addresses.sh import-addresses.sh
 ```
 
 ## Usage
@@ -32,12 +33,9 @@ chmod +x create-wallet.sh create-addresses.sh
 First you need to have a random list of words, a mnemonic. It's important to use a word list that is actually random in contrast to a phrase
 taken from a song or out of a book, because those can be brute-forced easily. 
 
-Tools to create random word lists are for example Bitcoin Explorer or Diceware (install with `sudo apt install diceware` on Ubuntu).
+Here's how to create a word list with Bitcoin Explorer:
 ```
 bx seed | bx mnemonic-new
-```
-```
-diceware -n 18 -d " " --no-caps
 ```
 The number of words should be 12 or more and must be divisible by 3. The words are case sensitive (best to use strictly lower case for simplicity) and their order is significant.
 
@@ -78,6 +76,8 @@ The new wallet is now created, encrypted and set up with the hd seed derived fro
 
 ### Addresses
 
+#### Create and Export
+
 In order to receive funds into this wallet you need to have btc addresses for it. 
 
 After selecting the new wallet in bitcoin-qt you can create btc addresses there. Alternatively use this script to create as much addresses as you need.
@@ -85,17 +85,30 @@ After selecting the new wallet in bitcoin-qt you can create btc addresses there.
 ```
 create-addresses.sh <rpcuser> <rpcpassword> <wallet> 250 > btc-addresses.txt
 ```
-This creates 250 new btc addresses for the given wallet and writes them into the file `btc-addresses.txt`.
+This creates 250 new btc addresses for the wallet and writes them into the file `btc-addresses.txt`. 
+
+With every run of this command new (different) addresses will be created for the given wallet.
+
+#### Import
+
+In order to conveniently and safely track incoming transactions for these addresses you may want to keep them without their corresponding private keys in a separate wallet. 
+
+To do so you can import addresses from a file.
+```
+import-addresses.sh <rpcuser> <rpcpassword> <wallet> < btc-addresses.txt
+```
+If the given wallet does not exist then it will be created: a wallet without private key support that only contains the imported btc addresses. 
+
+Select the wallet in bitcoin-qt. If incoming transactions don't show up, restart bitcoin-qt with the `-rescan` option.
 
 ### Backup
 
-You can choose to keep the memnonic (and, if used, the seed passphrase) as the only wallet backup: Keep the sheet of paper with the mnemonic,
-close the wallet in bitcoin-qt and remove the wallet file with the private keys from disk.
+You can choose to keep the memnonic (and, if used, the seed passphrase) as the only wallet backup: Keep the sheet of paper with the mnemonic, close the wallet in bitcoin-qt and remove the wallet file with the private keys from disk.
 
-With the addresses you generated before you are be able to receive funds into this cold (paper) wallet.
+With the btc addresses you generated before you are able to receive funds into this cold (paper) wallet. 
 
-To access the funds at a later time
-simply re-create the wallet with the mnemonic and select it in bitcoin-qt.
+To access the funds at a later time simply re-create the wallet from the mnemonic and select it in bitcoin-qt.
+If you don't see any balance after re-creating the wallet restart bitcoin-qt with the `-rescan` option.
 
 ## Disclaimer
 
@@ -105,7 +118,6 @@ These scripts come with absolutely no warranty whatsoever. *Use them at your own
 
 These scripts are public domain. Use them as you see fit.
 
-## TODO
+## Donations
 
-- Provide/extend script to import addresses into a readonly wallet (without private keys) in order to be able to track incoming funds.
-
+`bc1qdlllwwv05yg242z7zft5wcr7xa778zu20k0few`

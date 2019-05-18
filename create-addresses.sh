@@ -11,6 +11,9 @@ USER=$1
 PW=$2
 WALLET=$3
 
+# make sure wallet is loaded
+bitcoin-cli -rpcuser="$USER" -rpcpassword="$PW" loadwallet "$WALLET" >/dev/null 2>&1 || true
+
 if [ "$#" -ge 4 ]; then
   ADDRCNT="$4"
 else
@@ -18,5 +21,5 @@ else
 fi
 
 for (( i = 0; i < ADDRCNT; i++ )); do
-  bitcoin-cli -rpcuser="$USER" -rpcpassword="$PW" -rpcwallet="$WALLET" getnewaddress "" "$ADDRFMT"
+  bitcoin-cli -rpcuser="$USER" -rpcpassword="$PW" -rpcwallet="$WALLET" getnewaddress "" bech32
 done

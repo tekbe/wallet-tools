@@ -31,7 +31,7 @@ export PATH=/path/to/bx/bin:$PATH
 
 Download and install [Bitcoin Core](https://bitcoincore.org/en/download/).
 
-Make sure `bitcoin-cli` is in the path.
+Make sure `bitcoin-cli` is in the path and the Bitcoin version is v0.18.0 or higher.
 
 ```
 bitcoin-cli -version
@@ -42,7 +42,7 @@ Bitcoin Core RPC client version v0.18.0
 
 Make sure bitcoin core runs and accepts wallet API calls.
 ```
-bitcoin-cli -rpcuser=RPCUSER -rpcpassword=RPCPASSWORD listwallets
+bitcoin-cli -rpcuser=<user> -rpcpassword=<pw> listwallets
 ```
 ```
 [
@@ -52,7 +52,7 @@ bitcoin-cli -rpcuser=RPCUSER -rpcpassword=RPCPASSWORD listwallets
 
 One way of achieving this is by starting `bitcoin-qt` with these options:
 ```bash
-bitcoin-qt -rpcuser=RPCUSER -rpcpassword=RPCPASSWORD -server &
+bitcoin-qt -rpcuser=<user> -rpcpassword=<pw> -server &
 ```
 
 
