@@ -8,6 +8,19 @@ This allows you to use a mnemonic as wallet backup for Bitcoin Core wallets.
 
 These scripts require Bitcoin Core >= v0.18.0 and Bitcoin Explorer >= 3.4.0. See [here](REQUIREMENTS.md) for more details.
 
+## How it works
+
+- Bitcoin Core allows you to create a [deterministic wallet](https://en.bitcoinwiki.org/wiki/Deterministic_wallet) from a seed
+- Bitcoin Explorer allows you create such seed from a word list
+
+This can be done with only two lines in the terminal:
+```
+$ echo "secret word list" | bx mnemonic-to-seed | bx hd-new | bx hd-to-ec | bx ec-to-wif
+L1C5z47WPpAsckaWpiGyiM6y62UBZfu5S8imRSnAJbXib39tCKHC
+$ bitcoin-cli sethdseed true "L1C5z47WPpAsckaWpiGyiM6y62UBZfu5S8imRSnAJbXib39tCKHC"
+```
+The scripts provide some additional convenience, but I encourage you to make yourself familiar with these commands until you feel confident enough to use them.
+
 ## Install
 
 Make sure you've got a local `bin` folder for executables.
