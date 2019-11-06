@@ -121,7 +121,9 @@ You can choose to keep the memnonic (and, if used, the seed passphrase) as the o
 With the btc addresses you generated before you are able to receive funds into this cold (paper) wallet. 
 
 To access the funds at a later time simply re-create the wallet from the mnemonic and select it in bitcoin-qt.
-If you don't see any balance after re-creating the wallet restart bitcoin-qt with the `-rescan` option.
+If you don't see any balance after re-creating the wallet restart bitcoin-qt with the `-rescan` and `-reindex` option (this takes *a lot* of time).
+Also make sure the re-created wallet is loaded on startup: by using it as default `wallet.dat` in the bitcoin core data directory or by putting the wallet file
+in a subfolder and adding the option `-wallet=<subfolder>` when running bitcoin-qt.
 
 ## Disclaimer
 
