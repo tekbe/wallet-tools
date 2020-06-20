@@ -116,7 +116,7 @@ Select the wallet in bitcoin-qt. If incoming transactions don't show up, restart
 
 ### Backup
 
-You can choose to keep the memnonic (and, if used, the seed passphrase) as the only wallet backup: Keep the sheet of paper with the mnemonic, close the wallet in bitcoin-qt and remove the wallet file with the private keys from disk.
+You can choose to keep the memnonic (and, if used, the seed passphrase) as the only wallet backup: Keep the sheet of paper with the mnemonic, close the wallet in bitcoin-qt and remove the wallet file with the private keys from disk. To physically delete the wallet file and preclude restoration from disk use `shred -u wallet.dat`.
 
 With the btc addresses you generated before you are able to receive funds into this cold (paper) wallet. 
 
